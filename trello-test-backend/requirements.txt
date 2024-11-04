@@ -1,0 +1,6 @@
+Flask
+graphene
+Flask-GraphQL
+boto3
+python-dotenv
+# Include other dependencies as needed
