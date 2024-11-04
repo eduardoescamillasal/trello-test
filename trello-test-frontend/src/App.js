@@ -1,18 +1,22 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import {ApolloClient, InMemoryCache, ApolloProvider} from "@apollo/client";
-// import App from "./App";
+import {gql, useQuery} from "@apollo/client";
 
-const client = new ApolloClient({
-  uri: "http://localhost:5000/graphql",
-  cache: new InMemoryCache(),
-});
-
+const TEST_QUERY = gql`
+  query {
+    hello
+  }
+`;
 
 function App() {
+  const {loading, error, data} = useQuery(TEST_QUERY);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
   return (
     <div className='p-10 bg-kanban_bg'>
-      {/* <Tasks /> */}
+      <h1>GraphQL Data:</h1>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
   );
 }
