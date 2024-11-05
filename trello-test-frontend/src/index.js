@@ -1,19 +1,20 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import {createRoot} from "react-dom/client";
-import {ApolloClient, InMemoryCache, ApolloProvider} from "@apollo/client";
+import ReactDOM from "react-dom/client";
+ import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
+import { StoreProvider } from "./Store";
+import "./index.css";
 import App from "./App";
 
 const client = new ApolloClient({
-  uri: "http://localhost:5001/graphql", // Backend GraphQL endpoint
-  cache: new InMemoryCache(),
+  uri: 'http://localhost:5002/graphql',
+  cache: new InMemoryCache()
 });
 
-const container = document.getElementById("root");
-const root = createRoot(container);
-
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>
+   <ApolloProvider client={client}>
+    <StoreProvider>
+      <App />
+    </StoreProvider>
+   </ApolloProvider>,
 );
