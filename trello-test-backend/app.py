@@ -13,6 +13,7 @@ sys.path.append(current_script_directory)
 
 from fastapi import FastAPI, Response, Request
 from graphqls.schemas.schema import Query
+
 from graphqls.mutations.mutations import Mutation
 from graphene import Schema
 from starlette_graphene3 import GraphQLApp, make_playground_handler

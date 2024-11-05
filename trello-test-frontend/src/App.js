@@ -1,10 +1,10 @@
 import React from "react";
-import Tasks from "./Tasks/Container";
+import WorkItems from "./WorkItems/Container";
 
 function App() {
   return (
-    <div className="p-10 bg-kanban_bg">
-      <Tasks />
+    <div className="p-10 bg-kb_bg">
+      <WorkItems />
     </div>
   );
 }

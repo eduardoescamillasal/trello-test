@@ -1,8 +1,8 @@
 import {
-  NEW_TASK_ITEM,
-  UPDATE_TASK_ITEM,
-  UPDATE_TASKS,
-  REMOVE_TASK,
+  NEW_WORK_ITEM_ITEM,
+  UPDATE_WORK_ITEM_ITEM,
+  UPDATE_WORK_ITEMS,
+  REMOVE_WORK_ITEM,
   ADD_STAGE,
   REMOVE_STAGE,
   INIT_STATE
@@ -43,7 +43,7 @@ export default function reducer(state = initialState, action) {
       }
     }
 
-    case NEW_TASK_ITEM: {
+    case NEW_WORK_ITEM_ITEM: {
       const now = new Date().getTime();
       const stage = action.payload;
       return {
@@ -60,7 +60,7 @@ export default function reducer(state = initialState, action) {
       };
     }
 
-    case UPDATE_TASK_ITEM: {
+    case UPDATE_WORK_ITEM_ITEM: {
       const { taskID, text, stage, index } = action.payload;
       const now = new Date().getTime();
       return {
@@ -80,14 +80,14 @@ export default function reducer(state = initialState, action) {
       };
     }
 
-    case UPDATE_TASKS: {
+    case UPDATE_WORK_ITEMS: {
       return {
         ...state,
         ...action.payload
       };
     }
 
-    case REMOVE_TASK: {
+    case REMOVE_WORK_ITEM: {
       const { stage, taskID } = action.payload;
       return {
         ...state,

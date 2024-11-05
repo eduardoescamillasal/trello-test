@@ -1,6 +1,6 @@
 import React from "react";
-import { Draggable } from "react-beautiful-dnd";
-import EditableTask from "Tasks/views/EditableTask";
+import { Draggable } from '@hello-pangea/dnd';
+import EditableWorkItem from "WorkItems/views/EditableWorkItem";
 import Icon from "Components/Icon";
 import { Tooltip } from "@material-tailwind/react";
 
@@ -12,10 +12,10 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 });
 
 
-function Stage({ data, stage, removeTask, updateTask }) {
+function Stage({ data, stage, removeWorkItem, updateWorkItem }) {
   
-  const clickRemoveTask = (id, stage) => async e => {
-    removeTask({ taskID: id, stage })
+  const clickRemoveWorkItem = (id, stage) => async e => {
+    removeWorkItem({ taskID: id, stage })
   }
 
   return (
@@ -25,7 +25,7 @@ function Stage({ data, stage, removeTask, updateTask }) {
           <Draggable key={task.id} draggableId={task.id} index={index}>
             {(provided, snapshot) => (
               <div
-                className="bg-kanban_bg-card rounded-lg p-2"
+                className="bg-kb_bg-card rounded-lg p-2 "
                 style={getItemStyle(
                   snapshot.isDragging,
                   provided.draggableProps.style
@@ -36,31 +36,31 @@ function Stage({ data, stage, removeTask, updateTask }) {
               >
                 <div className="grid grid-cols-12 gap-[2px]">
                   <div className={task.text ? "col-span-10" : "col-span-12"}>
-                    <EditableTask
-                      updateTask={updateTask}
-                      removeTask={removeTask}
+                    <EditableWorkItem
+                      updateWorkItem={updateWorkItem}
+                      removeWorkItem={removeWorkItem}
                       task={task}
                       stage={stage}
                     />
                   </div>
                   {task.text && (
-                    <React.Fragment>
+                    <>
                       <div className="col-span-1">
                         <Tooltip content={new Date(task.created).toLocaleString()} placement="top">
                           <button>
-                            <Icon type="info" width="14" height="14" className="text-kanban_txt mt-[1px]" />
+                            <Icon type="info" width="14" height="14" className="text-kb_txt my-[1px]" />
                           </button>
                         </Tooltip>
                       </div>
                       <div className="col-span-1 self-center cursor-pointer ">
                         <div
                           className="z-10"
-                          onClick={clickRemoveTask(task.id, stage) }
+                          onClick={clickRemoveWorkItem(task.id, stage) }
                         >
-                          <Icon type="remove" width="12" height="12" className="text-kanban_txt" />
+                          <Icon type="remove" width="12" height="12" className="text-kb_txt" />
                         </div>
                       </div>
-                    </React.Fragment>
+                    </>
                   )}
                 </div>
               </div>

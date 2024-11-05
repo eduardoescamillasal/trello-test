@@ -1,5 +1,5 @@
 import reducer, { getInitialState } from "../reducer";
-import { NEW_TASK_ITEM, REMOVE_TASK, UPDATE_TASK_ITEM } from "../actions";
+import { NEW_WORK_ITEM_ITEM, REMOVE_WORK_ITEM, UPDATE_WORK_ITEM_ITEM } from "../actions";
 import stages from "../stages";
 
 const stateWithOneStage = {
@@ -35,7 +35,7 @@ describe("task reducer", () => {
   it("should add new task item", () => {
     expect(
       reducer(undefined, {
-        type: NEW_TASK_ITEM,
+        type: NEW_WORK_ITEM_ITEM,
         payload: "done"
       })
     ).toEqual({
@@ -56,7 +56,7 @@ describe("task reducer", () => {
   it("should update a task", () => {
     expect(
       reducer(stateWithOneStage, {
-        type: UPDATE_TASK_ITEM,
+        type: UPDATE_WORK_ITEM_ITEM,
         payload: {
           taskID: 5,
           text: "updated text",
@@ -79,7 +79,7 @@ describe("task reducer", () => {
   it("should remove a task", () => {
     expect(
       reducer(stateWithOneStage, {
-        type: REMOVE_TASK,
+        type: REMOVE_WORK_ITEM,
         payload: {
           taskID: 5,
           stage: "done"

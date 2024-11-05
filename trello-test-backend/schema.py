@@ -11,7 +11,7 @@ class Card(graphene.ObjectType):
 
 
 
-class Column(graphene.ObjectType):
+class Lists(graphene.ObjectType):
     id = graphene.ID()
     title = graphene.String()
     cards = graphene.List(Card)
@@ -19,7 +19,7 @@ class Column(graphene.ObjectType):
 class Board(graphene.ObjectType):
     id = graphene.ID()
     title = graphene.String()
-    columns = graphene.List(Column)
+    columns = graphene.List(Lists)
 
 class Query(graphene.ObjectType):
     test_field = graphene.String()

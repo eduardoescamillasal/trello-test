@@ -27,7 +27,7 @@ const move = (source, destination, droppableSource, droppableDestination) => {
   return result;
 };
 
-export const handleDragEnd = async ({ result, updateTasks, getList, cardIndexDrag, cardIndexDragToOther }) => {
+export const handleDragEnd = async ({ result, updateWorkItems, getList, cardIndexDrag, cardIndexDragToOther }) => {
   const { source, destination } = result;
 
   // dropped outside the list
@@ -47,7 +47,7 @@ export const handleDragEnd = async ({ result, updateTasks, getList, cardIndexDra
     tasks = {
       [source.droppableId]: items
     };
-    updateTasks(tasks);
+    updateWorkItems(tasks);
 
     try {
       // Execute the mutation
@@ -69,7 +69,7 @@ export const handleDragEnd = async ({ result, updateTasks, getList, cardIndexDra
       source,
       destination
     );
-    updateTasks(tasks);
+    updateWorkItems(tasks);
 
     try {
       // Execute the mutation

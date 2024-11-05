@@ -1,6 +1,7 @@
-Flask
+fastapi
+uvicorn
 graphene
-Flask-GraphQL
+starlette-graphene3
 boto3
-python-dotenv
-# Include other dependencies as needed
+pytest
+httpx

@@ -2,7 +2,7 @@ import { Popover, PopoverContent, PopoverHandler } from "@material-tailwind/reac
 import Icon from "Components/Icon";
 import React, { useEffect, useRef, useState } from "react";
 
-function Pop({ addEmptyTask, updateSortList, removeStage, id, pos }) {
+function Pop({ addEmptyWorkItem, updateSortList, removeStage, id, pos }) {
 
   const [open, setOpen] = useState(false)
 
@@ -27,9 +27,9 @@ function Pop({ addEmptyTask, updateSortList, removeStage, id, pos }) {
       <PopoverHandler>
         <div></div>
       </PopoverHandler>
-      <button onClick={() => {setOpen(true);}}><Icon type="dot" width="18" height="8" className="text-kanban_txt mt-1" /></button>
+      <button onClick={() => {setOpen(true);}}><Icon type="dot" width="18" height="8" className="text-kb_txt mt-1" /></button>
       <PopoverContent>
-        <div className=" bg-kanban_bg-edit text-kanban_txt px-3 w-72 rounded-lg" ref={popoverRef}>
+        <div className=" bg-kb_bg-edit text-kb_txt px-3 w-72 rounded-lg" ref={popoverRef}>
           <div className="relative text-center py-3">
             <p className="font-bold">List Actions</p>
             <div className="cursor-pointer" onClick={() => setOpen(false)}>
@@ -38,7 +38,7 @@ function Pop({ addEmptyTask, updateSortList, removeStage, id, pos }) {
           </div>
           <hr className="opacity-10" />
           
-          <div className="py-2 cursor-pointer" onClick={() => {addEmptyTask(id); setOpen(false)}}>
+          <div className="py-2 cursor-pointer" onClick={() => {addEmptyWorkItem(id); setOpen(false)}}>
             Add card...
           </div>
           <hr className="opacity-10" />

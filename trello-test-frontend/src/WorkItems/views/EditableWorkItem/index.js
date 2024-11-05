@@ -1,9 +1,9 @@
 import { useMutation } from "@apollo/client";
 import React, { useRef, useState } from "react";
-import { CREATE_CARD } from "Tasks/gq";
-import useOnClickOutside from "Tasks/utils/useOnClickOutside";
+import { CREATE_CARD } from "WorkItems/gq";
+import useOnClickOutside from "WorkItems/utils/useOnClickOutside";
 
-export default function EditableTask({ task, stage, removeTask, updateTask }) {
+export default function EditableWorkItem({ task, stage, removeWorkItem, updateWorkItem }) {
   const elementToEdit = useRef(null);
   const [text, setText] = useState(task.text || "");
   const [isEditing, setIsEditing] = useState(task.editMode);
@@ -13,16 +13,16 @@ export default function EditableTask({ task, stage, removeTask, updateTask }) {
   const [createCard] = useMutation(CREATE_CARD);
 
   useOnClickOutside(elementToEdit, () => {
-    handleEmptyTask();
+    handleEmptyWorkItem();
   });
 
   function handleTextChange(e) {
     setText(e.target.value);
   }
 
-  async function handleTaskUpdate() {
+  async function handleWorkItemUpdate() {
     if (!text) {
-      removeTask({ taskID: task.id, stage });
+      removeWorkItem({ taskID: task.id, stage });
     } else {
       try {
         // Execute the mutation
@@ -34,7 +34,7 @@ export default function EditableTask({ task, stage, removeTask, updateTask }) {
           }
         });
 
-        updateTask({
+        updateWorkItem({
           taskID: result.data.createCard.card.id,
           text: result.data.createCard.card.text,
           stage: result.data.createCard.card.listId,
@@ -56,9 +56,9 @@ export default function EditableTask({ task, stage, removeTask, updateTask }) {
 
   }
 
-  function handleEmptyTask() {
+  function handleEmptyWorkItem() {
     if (!task.text) {
-      removeTask({ taskID: task.id, stage });
+      removeWorkItem({ taskID: task.id, stage });
     } else {
       setText(task.text);
       setIsEditing(false);
@@ -66,8 +66,8 @@ export default function EditableTask({ task, stage, removeTask, updateTask }) {
   }
 
   function handleKeyPress(event) {
-    if (event.keyCode === 13) handleTaskUpdate();
-    if (event.keyCode === 27) handleEmptyTask();
+    if (event.keyCode === 13) handleWorkItemUpdate();
+    if (event.keyCode === 27) handleEmptyWorkItem();
   }
 
   return (
@@ -78,9 +78,9 @@ export default function EditableTask({ task, stage, removeTask, updateTask }) {
       {isEditing ? (
         <div ref={elementToEdit} className="">
           <input
-            className="focus:border-2 focus:border-blue-400 focus:outline-0 rounded-lg text-sm"
+            className="font-heading txt-3xl font-extra-black focus:border-2 focus:border-blue-400 focus:outline-0 rounded-lg text-base"
             type="text"
-            placeholder="New item..."
+            placeholder="New work item"
             value={text}
             onChange={handleTextChange}
             onKeyUp={handleKeyPress}
@@ -89,7 +89,7 @@ export default function EditableTask({ task, stage, removeTask, updateTask }) {
         </div>
       ) : (
         <div className="">
-          <div className="text-kanban_txt text-xs mt-[2px]">{task.text}</div>
+          <div className="text-shadow-customs text-kb_txt text-sm mt-[2px]">{task.text}</div>
         </div>
       )}
     </div>
