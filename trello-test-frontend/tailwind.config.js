@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       colors: {
         kanban_bg: {
-          DEFAULT: "#8F3F65",
+          DEFAULT: "#20187B",
           plan: "#101204",
           card: "#22272B",
           add_plan: "#AA6D8A",
