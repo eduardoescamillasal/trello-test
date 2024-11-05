@@ -181,6 +181,7 @@ function WorkItems() {
 
   return (
     <div className='px-4 bg-grainy-gradient bg-blend-overlay bg-cover min-h-screen'>
+      <h1 className='font-heading  text-custom-size text-kb_txt '>Micro Kanban</h1>
       <div className='py-4 w-full relative overflow-x-auto overflow-y-hidden h-[calc(100vh-80px)]'>
         <div className='inline-flex gap-6'>
           <DragDropContext onDragEnd={onDragEnd}>
@@ -218,7 +219,7 @@ function WorkItems() {
                     className='mt-3 w-full flex items-center justify-center bg-kb_bg-card hover:bg-kb_bg-add_plan_hover text-kb_txt py-2 rounded-lg transition-colors duration-200'
                     onClick={() => addEmptyWorkItem(key)}>
                     <Icon type='add' width='16' height='16' className='mr-2' />
-                    <span className='text-sm font-medium'>Add a card</span>
+                    <span className='text-sm font-medium'>Add a work item</span>
                   </button>
                 </div>
               </div>

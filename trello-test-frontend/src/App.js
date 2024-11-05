@@ -3,7 +3,7 @@ import WorkItems from "./WorkItems/Container";
 
 function App() {
   return (
-    <div className="p-10 bg-kb_bg">
+    <div className='bg-kb_bg'>
       <WorkItems />
     </div>
   );
