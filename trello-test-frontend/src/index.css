@@ -25,17 +25,17 @@ code {
 /* Track */
 ::-webkit-scrollbar-track {
   overflow-y: hidden;
-  background: #7A3657;
+  background: #bb1c69;
   border-radius: 5px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #AF8699;
+  background: #45172c;
   border-radius: 5px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #AF8699;
+  background: #27121c;
 }

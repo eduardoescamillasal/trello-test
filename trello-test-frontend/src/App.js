@@ -1,5 +1,5 @@
 import React from "react";
-import WorkItems from "./WorkItems/Container";
+import WorkItems from "./views/WorkItems/WorkItems";
 
 function App() {
   return (

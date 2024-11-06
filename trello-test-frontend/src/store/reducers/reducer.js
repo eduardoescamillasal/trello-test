@@ -6,9 +6,9 @@ import {
   ADD_STAGE,
   REMOVE_STAGE,
   INIT_STATE
-} from "./actions";
-import stages from "./stages";
-import { createUUID } from "./utils";
+} from "../actions/actions";
+import stages from "../stages";
+import { createUUID } from "../../utils";
 
 export const getInitialState = stages => ({
   ...stages.reduce((mem, { key }) => {

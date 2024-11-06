@@ -2,9 +2,9 @@ import React, {useEffect, useState, useContext} from "react";
 import {useQuery, useMutation} from "@apollo/client";
 import {DragDropContext, Droppable} from "@hello-pangea/dnd";
 
-import {Store} from "../Store";
-import Stage from "./views/Stage";
-import Pop from "./views/Pop";
+import {Store} from "../../store/Store";
+import Stage from "../Stage";
+import Pop from "../Pop";
 import Icon from "Components/Icon";
 
 import {
@@ -15,21 +15,19 @@ import {
   ADD_STAGE,
   REMOVE_STAGE,
   INIT_STATE,
-} from "./actions";
+} from "../../store/actions/actions";
 
-import {getListStyle, handleDragEnd} from "./utils/drag";
-import {getInitialState} from "./reducer";
+import {getListStyle, handleDragEnd} from "../../utils/drag";
+import {getInitialState} from "../../store/reducers/reducer";
 
-import {
-  GET_DATA,
-  CREATE_LIST,
+
+import { GET_DATA } from "graphql/queries";
+import {CREATE_LIST,
   CARD_INDEX_DRAG,
   CARD_INDEX_DRAG_TO_OTHER,
   DELETE_LIST,
   UPDATE_LIST,
-  DELETE_CARD,
-} from "./gq";
-
+  DELETE_CARD} from "graphql/mutations"
 function WorkItems() {
   // Access the global state and dispatch function from the Store context
   const {state, dispatch} = useContext(Store);

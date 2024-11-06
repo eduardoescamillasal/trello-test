@@ -27,40 +27,37 @@ const move = (source, destination, droppableSource, droppableDestination) => {
   return result;
 };
 
-export const handleDragEnd = async ({ result, updateWorkItems, getList, cardIndexDrag, cardIndexDragToOther }) => {
-  const { source, destination } = result;
+export const handleDragEnd = async ({
+  result,
+  state,
+  dispatch,
+  getList,
+  updateWorkItems,
+  cardIndexDrag,
+  cardIndexDragToOther,
+}) => {
+  const {source, destination} = result;
 
-  // dropped outside the list
-  if (!destination) {
-    return;
-  }
+  if (!destination) return;
 
   let tasks = {};
 
   if (source.droppableId === destination.droppableId) {
-    const items = reorder(
-      getList(source.droppableId),
-      source.index,
-      destination.index
-    );
+    const items = reorder(getList(source.droppableId), source.index, destination.index);
 
-    tasks = {
-      [source.droppableId]: items
-    };
-    updateWorkItems(tasks);
+    tasks = {[source.droppableId]: items};
+    updateWorkItems(tasks); // Use updateWorkItems here
 
     try {
-      // Execute the mutation
       await cardIndexDrag({
         variables: {
           listId: source.droppableId,
           cardPos: source.index,
-          targetPos: destination.index
-        }
+          targetPos: destination.index,
+        },
       });
     } catch (error) {
-      // console.log("error", error)
-      alert(error)
+      alert(error.message);
     }
   } else {
     tasks = move(
@@ -69,21 +66,20 @@ export const handleDragEnd = async ({ result, updateWorkItems, getList, cardInde
       source,
       destination
     );
-    updateWorkItems(tasks);
+    updateWorkItems(tasks); // Use updateWorkItems here
 
     try {
-      // Execute the mutation
       await cardIndexDragToOther({
         variables: {
           cardListId: source.droppableId,
           targetListId: destination.droppableId,
           cardPos: source.index,
-          targetPos: destination.index
-        }
+          targetPos: destination.index,
+        },
       });
     } catch (error) {
-      // console.log("error", error)
-      alert(error)
+      alert(error.message);
     }
   }
 };
+

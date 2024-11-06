@@ -1,7 +1,8 @@
 import { useMutation } from "@apollo/client";
+import { CREATE_CARD } from "graphql/mutations";
 import React, { useRef, useState } from "react";
-import { CREATE_CARD } from "WorkItems/gq";
-import useOnClickOutside from "WorkItems/utils/useOnClickOutside";
+
+import useOnClickOutside from "utils/useOnClickOutside";
 
 export default function EditableWorkItem({ task, stage, removeWorkItem, updateWorkItem }) {
   const elementToEdit = useRef(null);
