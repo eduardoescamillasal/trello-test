@@ -1,70 +1,128 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Trello Mini Kanban
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+This project is a Trello-like Kanban board application. It includes a frontend built with React and a backend API powered by Python using FastAPI. Data is stored locally using DynamoDB.
 
-### `npm start`
+## Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+To run this project locally, you’ll need the following:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Node.js** and **npm** (preferably using Node v18.2.0): [Download here](https://nodejs.org/)
+  - **NVM**: If you use Node Version Manager, ensure to set the version with `nvm use 18.2.0`
+- **Python 3.9**: [Download here](https://www.python.org/downloads/)
+- **DynamoDB Local**: Download and configure for local development
+- **Uvicorn**: ASGI server to run the FastAPI backend
+- **AWS CLI** (optional for DynamoDB setup): [Download here](https://aws.amazon.com/cli/)
 
-### `npm test`
+## Setup Instructions
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 1. Clone the Repository
 
-### `npm run build`
+```bash
+git clone https://github.com/yourusername/your-repo.git
+cd your-repo
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2. Setting Up the Frontend
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Navigate to the frontend directory and install dependencies:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+cd trello-test-frontend
+nvm use 18.2.0  # Ensure Node version 18.2.0
+npm install
+```
 
-### `npm run eject`
+### 3. Setting Up the Backend
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Navigate to the backend directory and create a virtual environment for dependencies:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+cd ../trello-test-backend
+python -m venv venv
+source venv/bin/activate  # For Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 4. Set Up DynamoDB Locally
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Download DynamoDB Local from the [AWS DynamoDB Local page](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html).
 
-## Learn More
+1. **Unzip and start DynamoDB Local**:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   ```bash
+   java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
+   ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2. **Configure AWS CLI for Local DynamoDB** (optional):
 
-### Code Splitting
+   ```bash
+   aws configure
+   # Set these values for local development:
+   # AWS Access Key ID [None]: dummy-key
+   # AWS Secret Access Key [None]: dummy-secret
+   # Default region name [None]: us-west-2
+   # Default output format [None]: json
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+   Then, point the AWS CLI to use the local DynamoDB instance:
 
-### Analyzing the Bundle Size
+   ```bash
+   export AWS_ENDPOINT_URL="http://localhost:8000"
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 5. Configure Environment Variables
 
-### Making a Progressive Web App
+Create an `.env` file in the `trello-test-backend` directory with necessary configurations:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```plaintext
+# DynamoDB Local URL
+DYNAMODB_ENDPOINT=http://localhost:8000
 
-### Advanced Configuration
+# Other environment variables as needed
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 6. Running the Backend with Uvicorn
 
-### Deployment
+To start the FastAPI backend server with `uvicorn`, run:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```bash
+uvicorn app:app --reload --host 0.0.0.0 --port 5003
+```
 
-### `npm run build` fails to minify
+This will start the backend server at `http://127.0.0.1:5003`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 7. Running the Frontend
+
+In a separate terminal window, go to the `trello-test-frontend` directory and start the React development server:
+
+```bash
+npm start
+```
+
+The frontend should now be accessible at `http://localhost:3000`.
+
+## API Documentation
+
+The FastAPI backend includes auto-generated API documentation. You can access it at:
+
+- Swagger UI: `http://127.0.0.1:5003/docs`
+- ReDoc: `http://127.0.0.1:5003/redoc`
+
+## Troubleshooting
+
+- **DynamoDB Connection Issues**: Ensure DynamoDB Local is running on `http://localhost:8000`.
+- **CORS Issues**: If you encounter CORS errors, ensure the frontend and backend have appropriate CORS settings.
+- **Environment Variables**: Ensure all required environment variables are set correctly in `.env`.
+
+## Additional Commands
+
+### Stopping DynamoDB Local
+
+To stop DynamoDB Local, press `Ctrl + C` in the terminal window where it’s running.
+
+
+
+---

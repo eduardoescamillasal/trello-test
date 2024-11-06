@@ -50,5 +50,4 @@ async def root():
 async def graphql_options():
     return Response(status_code=200)
 
-# Use add_route instead of mount to allow specific methods on /graphql
 app.add_route("/graphql", GraphQLApp(schema=schema, on_get=make_playground_handler()), methods=["GET", "POST", "OPTIONS"])

@@ -30,11 +30,3 @@ class Query(graphene.ObjectType):
 schema = graphene.Schema(query=Query)
 
 
-# class CreateCard(graphene.Mutation):
-#     # Implement create card mutation
-
-# class Mutation(graphene.ObjectType):
-#     create_card = CreateCard.Field()
-#     # Other mutations
-
-# schema = graphene.Schema(query=Query, mutation=Mutation)

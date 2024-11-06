@@ -4,10 +4,10 @@ from botocore.exceptions import ClientError
 def delete_table(table_name):
     dynamodb = boto3.resource(
         'dynamodb',
-        endpoint_url='http://localhost:8000',  # DynamoDB Local endpoint
-        region_name='us-west-2',               # Region name (can be any valid AWS region)
-        aws_access_key_id='anything',          # Credentials are not required for DynamoDB Local
-        aws_secret_access_key='anything'
+        endpoint_url='http://localhost:8000',  
+        region_name='us-west-2',               
+        aws_access_key_id='blablabla',          
+        aws_secret_access_key='blablabla'
     )
 
     table = dynamodb.Table(table_name)
