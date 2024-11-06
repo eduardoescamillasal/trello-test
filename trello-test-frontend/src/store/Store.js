@@ -1,5 +1,5 @@
 import React from "react";
-import {reducer as WorkItemReducer} from "./WorkItems";
+import {reducer as WorkItemReducer} from ".";
 
 export const Store = React.createContext();
 

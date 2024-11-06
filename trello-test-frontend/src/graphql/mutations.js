@@ -1,27 +1,7 @@
-import { gql } from '@apollo/client';
-
-export const GET_DATA = gql`
-  query {
-    getAllList{
-      key
-      title
-      sort,
-      created
-    },
-    getAllCard{
-      id
-      text
-      index
-      editMode
-      created
-      updated
-      listId
-    }
-  }
-`;
+import {gql} from "@apollo/client";
 
 export const CREATE_LIST = gql`
-  mutation CreateList($title: String!){
+  mutation CreateList($title: String!) {
     createList(title: $title) {
       list {
         key
@@ -30,10 +10,10 @@ export const CREATE_LIST = gql`
       }
     }
   }
-`
+`;
 
 export const CREATE_CARD = gql`
-  mutation CreateCard($id: String!, $listId: String!, $text: String!){
+  mutation CreateCard($id: String!, $listId: String!, $text: String!) {
     createCard(id: $id, listId: $listId, text: $text) {
       card {
         id
@@ -47,10 +27,10 @@ export const CREATE_CARD = gql`
       }
     }
   }
-`
+`;
 
 export const CARD_INDEX_DRAG = gql`
-  mutation CardIndexDrag($listId: String!, $cardPos: Int!, $targetPos: Int!){
+  mutation CardIndexDrag($listId: String!, $cardPos: Int!, $targetPos: Int!) {
     cardIndexDrag(listId: $listId, cardPos: $cardPos, targetPos: $targetPos) {
       cards {
         text
@@ -58,7 +38,7 @@ export const CARD_INDEX_DRAG = gql`
       }
     }
   }
-`
+`;
 
 export const CARD_INDEX_DRAG_TO_OTHER = gql`
   mutation CardIndexDragToOther($cardListId: String!, $targetListId: String!, $cardPos: Int!, $targetPos: Int!){
@@ -68,27 +48,27 @@ export const CARD_INDEX_DRAG_TO_OTHER = gql`
         index
       }
     }
-  }
-`
+  }`
+  
 
 export const DELETE_CARD = gql`
   mutation DeleteCard($id: String!) {
-    deleteCard(id: $id){
+    deleteCard(id: $id) {
       card
     }
   }
-`
+`;
 
 export const DELETE_LIST = gql`
   mutation DeleteList($id: String!) {
-    deleteList(id: $id){
+    deleteList(id: $id) {
       list
     }
   }
-`
+`;
 
 export const UPDATE_LIST = gql`
-  mutation UpdateList($id: String!, $sort: String!){
+  mutation UpdateList($id: String!, $sort: String!) {
     updateList(id: $id, sort: $sort) {
       list {
         id
@@ -97,4 +77,4 @@ export const UPDATE_LIST = gql`
       }
     }
   }
-`
+`;

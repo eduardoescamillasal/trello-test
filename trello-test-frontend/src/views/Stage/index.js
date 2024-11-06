@@ -1,6 +1,6 @@
 import React from "react";
 import { Draggable } from '@hello-pangea/dnd';
-import EditableWorkItem from "WorkItems/views/EditableWorkItem";
+import EditableWorkItem from "views/EditableWorkItem";
 import Icon from "Components/Icon";
 import { Tooltip } from "@material-tailwind/react";
 
