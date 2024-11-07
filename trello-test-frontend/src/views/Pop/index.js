@@ -54,7 +54,7 @@ function Pop({ addEmptyWorkItem, updateSortList, removeStage, id, pos }) {
               addEmptyWorkItem(id);
               setOpen(false);
             }}>
-            Add card...
+            +   Add work item...
           </div>
           <hr className='opacity-10' />
 
@@ -64,23 +64,16 @@ function Pop({ addEmptyWorkItem, updateSortList, removeStage, id, pos }) {
               updateSortList(id, pos, "newest");
               setOpen(false);
             }}>
-            Sort list (newest first)
+          *  sort | time 
           </div>
-          <div
-            className='py-2 cursor-pointer'
-            onClick={() => {
-              updateSortList(id, pos, "oldest");
-              setOpen(false);
-            }}>
-            Sort list (oldest first)
-          </div>
+         
           <div
             className='py-2 cursor-pointer'
             onClick={() => {
               updateSortList(id, pos, "update");
               setOpen(false);
             }}>
-            Sort list (update)
+           * sort | updates
           </div>
           <div
             className='py-2 cursor-pointer'
@@ -88,7 +81,7 @@ function Pop({ addEmptyWorkItem, updateSortList, removeStage, id, pos }) {
               updateSortList(id, pos, "alpha");
               setOpen(false);
             }}>
-            Sort list (alphabetically)
+           * sort | alphabetically
           </div>
           <hr className='opacity-10' />
 

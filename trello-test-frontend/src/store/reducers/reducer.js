@@ -11,9 +11,9 @@ import stages from "../stages";
 import { createUUID } from "../../utils";
 
 export const getInitialState = stages => ({
-  ...stages.reduce((mem, { key }) => {
-    mem[key] = [];
-    return mem;
+  ...stages.reduce((hash, { key }) => {
+    hash[key] = [];
+    return hash;
   }, {}),
   searchTerm: ""
 });
