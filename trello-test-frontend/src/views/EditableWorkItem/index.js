@@ -1,10 +1,10 @@
-import { useMutation } from "@apollo/client";
-import { CREATE_CARD } from "graphql/mutations";
-import React, { useRef, useState } from "react";
+import {useMutation} from "@apollo/client";
+import {CREATE_CARD} from "graphql/mutations";
+import React, {useRef, useState} from "react";
 
 import useOnClickOutside from "utils/useOnClickOutside";
 
-export default function EditableWorkItem({ task, stage, removeWorkItem, updateWorkItem }) {
+export default function EditableWorkItem({task, stage, removeWorkItem, updateWorkItem}) {
   const elementToEdit = useRef(null);
   const [text, setText] = useState(task.text || "");
   const [isEditing, setIsEditing] = useState(task.editMode);
@@ -23,7 +23,7 @@ export default function EditableWorkItem({ task, stage, removeWorkItem, updateWo
 
   async function handleWorkItemUpdate() {
     if (!text) {
-      removeWorkItem({ taskID: task.id, stage });
+      removeWorkItem({taskID: task.id, stage});
     } else {
       try {
         // Execute the mutation
@@ -31,20 +31,19 @@ export default function EditableWorkItem({ task, stage, removeWorkItem, updateWo
           variables: {
             id: task.id,
             listId: stage,
-            text: text
-          }
+            text: text,
+          },
         });
 
         updateWorkItem({
           taskID: result.data.createCard.card.id,
           text: result.data.createCard.card.text,
           stage: result.data.createCard.card.listId,
-          index: result.data.createCard.card.index
+          index: result.data.createCard.card.index,
         });
-
       } catch (error) {
         // console.log("error", error)
-        alert(error)
+        alert(error);
       }
     }
 
@@ -54,12 +53,11 @@ export default function EditableWorkItem({ task, stage, removeWorkItem, updateWo
       setShowAnimation(false);
       clearTimeout(timer);
     }, 600);
-
   }
 
   function handleEmptyWorkItem() {
     if (!task.text) {
-      removeWorkItem({ taskID: task.id, stage });
+      removeWorkItem({taskID: task.id, stage});
     } else {
       setText(task.text);
       setIsEditing(false);
@@ -74,14 +72,13 @@ export default function EditableWorkItem({ task, stage, removeWorkItem, updateWo
   return (
     <div
       className={`${showAnimation && "opacity-0 transform -translate-x-10"} w-full`}
-      onDoubleClick={() => setIsEditing(true)}
-    >
+      onDoubleClick={() => setIsEditing(true)}>
       {isEditing ? (
-        <div ref={elementToEdit} className="">
+        <div ref={elementToEdit} className=''>
           <input
-            className="font-heading txt-3xl font-extra-black focus:border-2 focus:border-blue-400 focus:outline-0 rounded-lg text-base"
-            type="text"
-            placeholder="New work item"
+            className='font-heading text-md font-black focus:border-0 focus:border-indigo-600 focus:outline-none rounded-lg text-base w-auto max-w-[80%]'
+            type='text'
+            placeholder='New work item'
             value={text}
             onChange={handleTextChange}
             onKeyUp={handleKeyPress}
@@ -89,10 +86,11 @@ export default function EditableWorkItem({ task, stage, removeWorkItem, updateWo
           />
         </div>
       ) : (
-        <div className="">
-          <div className="text-shadow-customs text-kb_txt text-sm mt-[2px]">{task.text}</div>
+        <div className=''>
+          <div className='text-shadow-custom text-kb_txt text-sm mt-[2px]'>{task.text}</div>
         </div>
       )}
     </div>
   );
 }
+

@@ -20,14 +20,16 @@ import {
 import {getListStyle, handleDragEnd} from "../../utils/drag";
 import {getInitialState} from "../../store/reducers/reducer";
 
-
-import { GET_DATA } from "graphql/queries";
-import {CREATE_LIST,
+import {GET_DATA} from "graphql/queries";
+import {
+  CREATE_LIST,
   CARD_INDEX_DRAG,
   CARD_INDEX_DRAG_TO_OTHER,
   DELETE_LIST,
   UPDATE_LIST,
-  DELETE_CARD} from "graphql/mutations"
+  DELETE_CARD,
+} from "graphql/mutations";
+
 function WorkItems() {
   // Access the global state and dispatch function from the Store context
   const {state, dispatch} = useContext(Store);
@@ -178,14 +180,14 @@ function WorkItems() {
   };
 
   return (
-    <div className='px-4 bg-grainy-gradient bg-blend-overlay bg-cover min-h-screen'>
-      <h1 className='font-heading  text-custom-size text-kb_txt '>Micro Kanban</h1>
+    <div className='px-4 py-8 bg-gradient-to-br from-teal-100 via-gray-300 to-fuchsia-100 bg-cover min-h-screen'>
+      <h1 className='font-heading text-4xl text-gray-800 mb-8'>Micro Kanban</h1>
       <div className='py-4 w-full relative overflow-x-auto overflow-y-hidden h-[calc(100vh-80px)]'>
-        <div className='inline-flex gap-6'>
+        <div className='flex gap-8 justify-start items-start px-4'>
           <DragDropContext onDragEnd={onDragEnd}>
             {stageList.map(({key, title}, index) => (
-              <div className='w-[272px]' key={key}>
-                <div className='p-3 bg-kb_bg-plan rounded-lg shadow-lg'>
+              <div className='w-[400px]' key={key}>
+                <div className='p-4 bg-gradient-to-b from-indigo-100 to-indigo-300 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300'>
                   <div className='flex justify-between items-center mb-2'>
                     <h2 className='text-kb_txt font-semibold text-base'>{title}</h2>
                     <Pop
@@ -201,7 +203,9 @@ function WorkItems() {
                       <div
                         ref={provided.innerRef}
                         style={getListStyle(snapshot.isDraggingOver)}
-                        className='space-y-2'>
+                        className={`space-y-2 p-3 rounded-lg transition-colors duration-300 ${
+                          snapshot.isDraggingOver ? "bg-indigo-200" : "bg-transparent"
+                        }`}>
                         <Stage
                           updateWorkItem={updateWorkItem}
                           removeWorkItem={removeWorkItem}
@@ -214,9 +218,9 @@ function WorkItems() {
                     )}
                   </Droppable>
                   <button
-                    className='mt-3 w-full flex items-center justify-center bg-kb_bg-card hover:bg-kb_bg-add_plan_hover text-kb_txt py-2 rounded-lg transition-colors duration-200'
+                    className='mt-3 w-full flex items-center justify-center bg-gradient-to-r from-blue-400 to-teal-500 hover:from-orange-500 hover:to-yellow-300 text-white py-2 rounded-lg transition-transform duration-200 transform hover:scale-105'
                     onClick={() => addEmptyWorkItem(key)}>
-                    <Icon type='add' width='16' height='16' className='mr-2' />
+                    <Icon type='add' width='20' height='20' className='mr-2' />
                     <span className='text-sm font-medium'>Add a work item</span>
                   </button>
                 </div>
@@ -243,7 +247,7 @@ function WorkItems() {
                     />
                     <div className='flex items-center'>
                       <button
-                        className='text-sm text-white bg-indigo-600 hover:bg-indigo-700 rounded px-3 py-1 mr-2'
+                        className='text-sm text-white bg-fuchsia-600 hover:bg-indigo-700 rounded px-3 py-1 mr-2'
                         onClick={addNewList}>
                         Add List
                       </button>
