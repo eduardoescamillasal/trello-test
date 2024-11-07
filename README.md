@@ -21,7 +21,7 @@ To run this project locally, you’ll need the following:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/your-repo.git
+[git clone](https://github.com/eduardoescamillasal/trello-test.git)
 cd your-repo
 ```
 
