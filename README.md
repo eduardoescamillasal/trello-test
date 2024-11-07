@@ -22,7 +22,7 @@ To run this project locally, you’ll need the following:
 
 ```bash
 git clone https://github.com/eduardoescamillasal/trello-test.git
-cd your-repo
+cd trello-test
 ```
 
 ### 2. Setting Up the Frontend
